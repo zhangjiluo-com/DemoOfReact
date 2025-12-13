@@ -10,4 +10,4 @@
 - [pnpm](https://pnpm.io/zh/) v10
 - [ESLint](https://eslint.org/) v9
 - [TanStack Router](https://tanstack.com/router/latest)
-- [Ant Design](https://ant.design/components/overview-cn/)
+- [Ant Design](https://ant.design/components/overview-cn/) v6

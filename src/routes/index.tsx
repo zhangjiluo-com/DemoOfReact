@@ -1,28 +1,17 @@
-import {
-  Outlet,
-  createRootRoute,
-  createRoute,
-  createRouter,
-} from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import Root from "../components/Root";
-
-const rootRoute = createRootRoute({
-  component: () => (
-    <>
-      <Outlet />
-      <TanStackRouterDevtools />
-    </>
-  ),
-});
+import { createRoute, createRouter } from "@tanstack/react-router";
+import { login } from "./login";
+import { workbench } from "./workbench";
+import { rootRoute } from "./root";
 
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: Root,
+  component: () => {
+    return <div className="">root</div>;
+  },
 });
 
-const routeTree = rootRoute.addChildren([indexRoute]);
+const routeTree = rootRoute.addChildren([indexRoute, login, workbench]);
 
 const router = createRouter({
   routeTree,
@@ -32,5 +21,11 @@ const router = createRouter({
   defaultStructuralSharing: true,
   defaultPreloadStaleTime: 0,
 });
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router;
+  }
+}
 
 export default router;
