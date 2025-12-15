@@ -1,0 +1,51 @@
+{
+  "name": "DemoOfTaro",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "taro build --type weapp --watch",
+    "build": "taro build --type weapp",
+    "postinstall": "weapp-tw patch --clear-cache"
+  },
+  "author": {
+    "name": "zhangjiluo.com",
+    "email": "603495474@qq.com",
+    "url": "https://www.zhangjiluo.com"
+  },
+  "dependencies": {
+    "@babel/runtime": "7.28.4",
+    "@taroify/core": "0.9.0",
+    "@tarojs/components": "4.1.9",
+    "@tarojs/helper": "4.1.9",
+    "@tarojs/plugin-framework-react": "4.1.9",
+    "@tarojs/plugin-platform-weapp": "4.1.9",
+    "@tarojs/react": "4.1.9",
+    "@tarojs/runtime": "4.1.9",
+    "@tarojs/shared": "4.1.9",
+    "@tarojs/taro": "4.1.9",
+    "react": "18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.28.5",
+    "@babel/plugin-transform-class-properties": "7.25.9",
+    "@babel/preset-react": "7.28.5",
+    "@pmmmwh/react-refresh-webpack-plugin": "0.6.2",
+    "@tailwindcss/postcss": "4.1.18",
+    "@tarojs/cli": "4.1.9",
+    "@tarojs/taro-loader": "4.1.9",
+    "@tarojs/webpack5-runner": "4.1.9",
+    "@types/minimatch": "5",
+    "@types/node": "24",
+    "@types/react": "18.3.27",
+    "@types/webpack-env": "1.18.8",
+    "babel-plugin-import": "1.13.8",
+    "babel-preset-taro": "4.1.9",
+    "less": "4.5.1",
+    "postcss": "8.5.6",
+    "react-refresh": "0.14.0",
+    "sass": "1.96.0",
+    "tailwindcss": "4.1.18",
+    "typescript": "5.9.3",
+    "weapp-tailwindcss": "4.8.11",
+    "webpack": "5.91.0"
+  }
+}
