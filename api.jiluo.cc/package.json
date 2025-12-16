@@ -1,0 +1,32 @@
+{
+  "name": "api.jiluo.cc",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node dist/main.js",
+    "dev": "tsup source/main.ts --watch --env.NODE_ENV development --env.MODE alpha --onSuccess \"node dist/main.js\"",
+    "build:alpha": "tsup source/main.ts --env.NODE_ENV production --env.MODE alpha",
+    "mci": "git pull && pnpm i && pnpm build:alpha"
+  },
+  "dependencies": {
+    "fastify": "4.17.0",
+    "mysql2": "^3.3.0",
+    "sequelize": "^6.31.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.0"
+  },
+  "tsup": {
+    "sourcemap": true,
+    "clean": true,
+    "noExternal": [
+      "fastify",
+      "mysql2",
+      "sequelize"
+    ],
+    "external": [
+      "pg-hstore"
+    ]
+  }
+}
