@@ -1,0 +1,21 @@
+{
+  "name": "www.jiluo.cc",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm dlx cross-env mode=alpha nuxt dev",
+    "build:alpha": "pnpm dlx cross-env mode=alpha nuxt build",
+    "build:beta": "pnpm dlx cross-env mode=beta nuxt build",
+    "build:stable": "pnpm dlx cross-env mode=production nuxt build",
+    "generate:alpha": "pnpm dlx cross-env mode=alpha nuxt build",
+    "generate:beta": "pnpm dlx cross-env mode=beta nuxt build",
+    "generate:stable": "pnpm dlx cross-env mode=production nuxt build",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "mci": "git pull && pnpm i && pnpm build:alpha"
+  },
+  "devDependencies": {
+    "@nuxtjs/i18n": "8.0.0-beta.10",
+    "@types/node": "^18.15.11",
+    "nuxt": "^3.5.2"
+  }
+}
