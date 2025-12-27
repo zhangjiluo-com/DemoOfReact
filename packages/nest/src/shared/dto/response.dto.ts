@@ -2,11 +2,13 @@ export class ResponseDto<T = any> {
   code: number;
   msg: string;
   data: T;
+  error?: any;
 
-  private constructor(code: number, msg: string, data: T) {
+  private constructor(code: number, msg: string, data: T, error?: any) {
     this.code = code;
     this.msg = msg;
     this.data = data;
+    this.error = error;
   }
 
   /**
@@ -32,8 +34,9 @@ export class ResponseDto<T = any> {
   static fail<T = any>(
     msg: string,
     code: number = 500,
-    data: T | null = null
+    data: T | null = null,
+    error?: any
   ): ResponseDto<T | null> {
-    return new ResponseDto<T | null>(code, msg, data);
+    return new ResponseDto<T | null>(code, msg, data, error);
   }
 }

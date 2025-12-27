@@ -10,10 +10,10 @@ import { HttpExceptionFilter } from "./shared/filters/http-exception.filter";
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: ["verbose", "debug", "log", "warn", "error", "fatal"],
-    bufferLogs: true,
+    // bufferLogs: true,
   });
 
-  app.useLogger(app.get(Logger));
+  // app.useLogger(app.get(Logger));
 
   // 设置全局路由前缀
   app.setGlobalPrefix("api");
@@ -24,6 +24,8 @@ async function bootstrap() {
       transform: true,
       whitelist: true,
       forbidNonWhitelisted: true,
+      forbidUnknownValues: true,
+      stopAtFirstError: true,
     })
   );
 

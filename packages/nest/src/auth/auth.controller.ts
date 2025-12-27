@@ -14,7 +14,7 @@ import { ApiHeader, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { LoginDto } from "./dto/login.dto";
 import { Public } from "src/shared/decorators/public.decorator";
 
-@ApiTags("用户")
+@ApiTags("认证")
 @ApiHeader({ name: "Authorization" })
 @Controller("auth")
 export class AuthController {

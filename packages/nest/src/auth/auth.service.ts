@@ -1,10 +1,14 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
+import { Logger } from "nestjs-pino";
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly jwtService: JwtService) {}
-  private readonly logger = new Logger(AuthService.name);
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly logger: Logger
+  ) {}
+  // private readonly logger = new Logger(AuthService.name);
 
   async login(username: string, password: string) {
     this.logger.log(`login: ${username} ${password}`);

@@ -5,9 +5,10 @@ import {
   HttpException,
   HttpStatus,
 } from "@nestjs/common";
-import { Response } from "express";
+import { query, Response } from "express";
 import { ResponseDto } from "../dto/response.dto";
 import { IS_DEV } from "src/config/constants";
+import { QueryFailedError } from "typeorm";
 
 // 捕获所有异常（包括内置异常和自定义异常）
 @Catch()
@@ -15,6 +16,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
+
+    console.log(exception, 99999);
+    console.log((exception as any)?.message, 99999);
 
     // 1. 处理 HTTP 内置异常（如 400/404/500）
     if (exception instanceof HttpException) {
@@ -30,11 +34,33 @@ export class HttpExceptionFilter implements ExceptionFilter {
       return;
     }
 
-    // 2. 处理未知异常（如代码运行时错误）
-    const msg = IS_DEV
-      ? (exception as any)?.message || "未知错误"
-      : "服务器内部错误";
+    if (IS_DEV && exception instanceof QueryFailedError) {
+      response.status(HttpStatus.OK).json(
+        ResponseDto.fail(
+          `${exception.message}: ${exception.message}`,
+          500,
+          null,
+          {
+            stack: exception.stack,
+            query: exception.query,
+            parameters: exception.parameters,
+          }
+        )
+      );
+      return;
+    }
 
-    response.status(HttpStatus.OK).json(ResponseDto.fail(msg, 500));
+    if (IS_DEV && exception instanceof Error) {
+      response.status(HttpStatus.OK).json(
+        ResponseDto.fail(`${exception.name}: ${exception.message}`, 500, null, {
+          stack: exception.stack,
+        })
+      );
+      return;
+    }
+
+    response
+      .status(HttpStatus.OK)
+      .json(ResponseDto.fail("服务器内部错误", 500));
   }
 }
