@@ -3,30 +3,28 @@ import { IsArray, IsInt, IsNumber, IsOptional, IsString, Max, Min } from 'class-
 import { Transform } from 'class-transformer'
 
 export class PageQueryBaseDto {
-  @ApiProperty({ description: '页码', default: 1 })
+  @ApiProperty({ description: '页码', default: 1, required: false })
   @IsNumber()
   @IsInt()
   @Min(1)
   @Max(1000)
   @IsOptional()
-  @Transform(({ value }) => parseInt(value || '1'))
   current: number = 1
 
-  @ApiProperty({ description: '步长', default: 10 })
+  @ApiProperty({ description: '步长', default: 10, required: false })
   @IsNumber()
   @IsInt()
   @Min(1)
   @Max(1000)
   @IsOptional()
-  @Transform(({ value }) => parseInt(value || '10'))
   size: number = 10
 
-  @ApiProperty({ description: '搜索关键词' })
+  @ApiProperty({ description: '搜索关键词', required: false })
   @IsString()
   @IsOptional()
   keyword: string = ''
 
-  @ApiProperty({ description: '升序排序字段' })
+  @ApiProperty({ description: '升序排序字段', required: false })
   @IsArray()
   @IsString({ each: true })
   @IsOptional()
@@ -35,7 +33,7 @@ export class PageQueryBaseDto {
   )
   asc: string[] = []
 
-  @ApiProperty({ description: '降序排序字段' })
+  @ApiProperty({ description: '降序排序字段', required: false })
   @IsArray()
   @IsString({ each: true })
   @IsOptional()

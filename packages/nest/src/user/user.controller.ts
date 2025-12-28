@@ -7,6 +7,8 @@ import { ApiHeader, ApiOperation, ApiTags } from '@nestjs/swagger'
 import { PageQueryBaseDto } from 'src/shared/dto/page-query.dto'
 import { StringArrayQuery } from 'src/shared/decorators/string-array-query.decorator'
 import { GetUserPageDto } from './dto/get-user-page.dto'
+import { CursorPageQueryDto } from 'src/shared/dto/cursor-page-query.dto'
+import { GetUserCursorPageDto } from './dto/get-user-cursor-page.dto'
 
 @ApiTags('用户')
 @ApiHeader({ name: 'Authorization' })
@@ -31,6 +33,12 @@ export class UserController {
   @Get('page')
   getPage(@Query() dto: GetUserPageDto) {
     return this.userService.getPage(dto)
+  }
+
+  @ApiOperation({ summary: '查询用户游标分页' })
+  @Get('cursor-page')
+  getCusorPage(@Query() dto: GetUserCursorPageDto) {
+    return this.userService.getCusorPage(dto)
   }
 
   @ApiOperation({ summary: '查询用户详情' })
