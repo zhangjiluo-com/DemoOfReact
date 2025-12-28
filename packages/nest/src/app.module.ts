@@ -11,6 +11,9 @@ import { User } from './user/entities/user.entity'
 import { SetupModule } from './setup/setup.module'
 import { RoleModule } from './role/role.module'
 import { PermissionModule } from './permission/permission.module'
+import { NoticeModule } from './notice/notice.module';
+import { OrderModule } from './order/order.module';
+import { TenantModule } from './tenant/tenant.module';
 
 @Module({
   imports: [
@@ -73,6 +76,9 @@ import { PermissionModule } from './permission/permission.module'
     UserModule,
     RoleModule,
     PermissionModule,
+    NoticeModule,
+    OrderModule,
+    TenantModule,
   ],
   controllers: [],
   providers: [

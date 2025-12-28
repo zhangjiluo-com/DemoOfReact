@@ -33,6 +33,20 @@ export class User {
   @Column('int', { default: 0 })
   status: number
 
+  /**
+   * 用户类型
+   * 1: 普通用户
+   * 2: 管理员
+   * 3: 超级管理员
+   * 4: 平台中心管理员
+   * 5: 平台中心超级管理员
+   * 6: 系统用户
+   * 7: 系统外部API用户
+   * 8: 系统超级管理员
+   */
+  @Column('int', { default: 0 })
+  type: number
+
   @CreateDateColumn()
   createdAt: Date
 
@@ -41,6 +55,12 @@ export class User {
 
   @DeleteDateColumn()
   removedAt: Date
+
+  // createdBy: User
+
+  // updatedBy: User
+
+  // removedBy: User
 
   @ManyToMany(() => Role, role => role.users, { onDelete: 'CASCADE' })
   @JoinTable({
