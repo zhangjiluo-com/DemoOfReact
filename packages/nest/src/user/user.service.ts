@@ -224,4 +224,21 @@ export class UserService {
     await this.userRepository.delete(id)
     return id
   }
+
+  async getSystemSuperAdmin() {
+    const result = await this.userRepository.findOne({
+      where: { type: 0b11111111 },
+    })
+    return result
+  }
+
+  async createSystemSuperAdmin() {
+    const result = await this.userRepository.save({
+      name: '系统超级管理员',
+      username: 'system',
+      password: '123456',
+      type: 0b11111111,
+    })
+    return result
+  }
 }

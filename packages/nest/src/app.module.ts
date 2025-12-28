@@ -11,9 +11,10 @@ import { User } from './user/entities/user.entity'
 import { SetupModule } from './setup/setup.module'
 import { RoleModule } from './role/role.module'
 import { PermissionModule } from './permission/permission.module'
-import { NoticeModule } from './notice/notice.module';
-import { OrderModule } from './order/order.module';
-import { TenantModule } from './tenant/tenant.module';
+import { NoticeModule } from './notice/notice.module'
+import { OrderModule } from './order/order.module'
+import { TenantModule } from './tenant/tenant.module'
+import { SystemReadyGuard } from './setup/setup-ready.guard'
 
 @Module({
   imports: [
@@ -85,6 +86,10 @@ import { TenantModule } from './tenant/tenant.module';
     {
       provide: APP_GUARD,
       useClass: AuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: SystemReadyGuard,
     },
   ],
 })

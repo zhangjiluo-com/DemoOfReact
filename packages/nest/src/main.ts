@@ -6,6 +6,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { PORT } from './config/constants'
 import { TransformResponseInterceptor } from './shared/interceptors/transform-response.interceptor'
 import { HttpExceptionFilter } from './shared/filters/http-exception.filter'
+import { SetupService } from './setup/setup.service'
+import { setReady } from './config/system-status'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -47,6 +49,9 @@ async function bootstrap() {
   SwaggerModule.setup('docs/swagger', app as any, document, {
     jsonDocumentUrl: 'docs/swagger/json',
   })
+
+  // 检查是否完成安装并且系统组件是否正常
+  await app.get(SetupService).check()
 
   await app.listen(PORT)
 }
